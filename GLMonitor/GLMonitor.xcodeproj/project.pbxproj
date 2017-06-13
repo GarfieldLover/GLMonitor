@@ -1,0 +1,383 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 46;
+	objects = {
+
+/* Begin PBXBuildFile section */
+		587658001EEFF31400FB30AA /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 587657FF1EEFF31400FB30AA /* main.m */; };
+		587658031EEFF31400FB30AA /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 587658021EEFF31400FB30AA /* AppDelegate.m */; };
+		587658061EEFF31400FB30AA /* ViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 587658051EEFF31400FB30AA /* ViewController.m */; };
+		587658091EEFF31400FB30AA /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 587658071EEFF31400FB30AA /* Main.storyboard */; };
+		5876580B1EEFF31400FB30AA /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 5876580A1EEFF31400FB30AA /* Assets.xcassets */; };
+		5876580E1EEFF31400FB30AA /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 5876580C1EEFF31400FB30AA /* LaunchScreen.storyboard */; };
+		587658241EEFF32C00FB30AA /* SVNetWorkMonitor.m in Sources */ = {isa = PBXBuildFile; fileRef = 587658181EEFF32C00FB30AA /* SVNetWorkMonitor.m */; };
+		587658251EEFF32C00FB30AA /* SVUIFPSMonitor.m in Sources */ = {isa = PBXBuildFile; fileRef = 5876581C1EEFF32C00FB30AA /* SVUIFPSMonitor.m */; };
+		587658261EEFF32C00FB30AA /* SVUIPerformanceMonitor.m in Sources */ = {isa = PBXBuildFile; fileRef = 5876581E1EEFF32C00FB30AA /* SVUIPerformanceMonitor.m */; };
+		587658271EEFF32C00FB30AA /* SVBacktraceLogger.m in Sources */ = {isa = PBXBuildFile; fileRef = 587658211EEFF32C00FB30AA /* SVBacktraceLogger.m */; };
+		587658281EEFF32C00FB30AA /* SVWeakCycleObject.m in Sources */ = {isa = PBXBuildFile; fileRef = 587658231EEFF32C00FB30AA /* SVWeakCycleObject.m */; };
+/* End PBXBuildFile section */
+
+/* Begin PBXFileReference section */
+		587657FB1EEFF31400FB30AA /* GLMonitor.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = GLMonitor.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		587657FF1EEFF31400FB30AA /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
+		587658011EEFF31400FB30AA /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
+		587658021EEFF31400FB30AA /* AppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AppDelegate.m; sourceTree = "<group>"; };
+		587658041EEFF31400FB30AA /* ViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ViewController.h; sourceTree = "<group>"; };
+		587658051EEFF31400FB30AA /* ViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ViewController.m; sourceTree = "<group>"; };
+		587658081EEFF31400FB30AA /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
+		5876580A1EEFF31400FB30AA /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
+		5876580D1EEFF31400FB30AA /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
+		5876580F1EEFF31400FB30AA /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		587658171EEFF32C00FB30AA /* SVNetWorkMonitor.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SVNetWorkMonitor.h; sourceTree = "<group>"; };
+		587658181EEFF32C00FB30AA /* SVNetWorkMonitor.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SVNetWorkMonitor.m; sourceTree = "<group>"; };
+		587658191EEFF32C00FB30AA /* SVMonitorActionProtocol.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SVMonitorActionProtocol.h; sourceTree = "<group>"; };
+		5876581B1EEFF32C00FB30AA /* SVUIFPSMonitor.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SVUIFPSMonitor.h; sourceTree = "<group>"; };
+		5876581C1EEFF32C00FB30AA /* SVUIFPSMonitor.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SVUIFPSMonitor.m; sourceTree = "<group>"; };
+		5876581D1EEFF32C00FB30AA /* SVUIPerformanceMonitor.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SVUIPerformanceMonitor.h; sourceTree = "<group>"; };
+		5876581E1EEFF32C00FB30AA /* SVUIPerformanceMonitor.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SVUIPerformanceMonitor.m; sourceTree = "<group>"; };
+		587658201EEFF32C00FB30AA /* SVBacktraceLogger.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SVBacktraceLogger.h; sourceTree = "<group>"; };
+		587658211EEFF32C00FB30AA /* SVBacktraceLogger.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SVBacktraceLogger.m; sourceTree = "<group>"; };
+		587658221EEFF32C00FB30AA /* SVWeakCycleObject.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SVWeakCycleObject.h; sourceTree = "<group>"; };
+		587658231EEFF32C00FB30AA /* SVWeakCycleObject.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SVWeakCycleObject.m; sourceTree = "<group>"; };
+/* End PBXFileReference section */
+
+/* Begin PBXFrameworksBuildPhase section */
+		587657F81EEFF31400FB30AA /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXFrameworksBuildPhase section */
+
+/* Begin PBXGroup section */
+		587657F21EEFF31400FB30AA = {
+			isa = PBXGroup;
+			children = (
+				587657FD1EEFF31400FB30AA /* GLMonitor */,
+				587657FC1EEFF31400FB30AA /* Products */,
+			);
+			sourceTree = "<group>";
+		};
+		587657FC1EEFF31400FB30AA /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				587657FB1EEFF31400FB30AA /* GLMonitor.app */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		587657FD1EEFF31400FB30AA /* GLMonitor */ = {
+			isa = PBXGroup;
+			children = (
+				587658151EEFF32C00FB30AA /* SVMonitor */,
+				587658011EEFF31400FB30AA /* AppDelegate.h */,
+				587658021EEFF31400FB30AA /* AppDelegate.m */,
+				587658041EEFF31400FB30AA /* ViewController.h */,
+				587658051EEFF31400FB30AA /* ViewController.m */,
+				587658071EEFF31400FB30AA /* Main.storyboard */,
+				5876580A1EEFF31400FB30AA /* Assets.xcassets */,
+				5876580C1EEFF31400FB30AA /* LaunchScreen.storyboard */,
+				5876580F1EEFF31400FB30AA /* Info.plist */,
+				587657FE1EEFF31400FB30AA /* Supporting Files */,
+			);
+			path = GLMonitor;
+			sourceTree = "<group>";
+		};
+		587657FE1EEFF31400FB30AA /* Supporting Files */ = {
+			isa = PBXGroup;
+			children = (
+				587657FF1EEFF31400FB30AA /* main.m */,
+			);
+			name = "Supporting Files";
+			sourceTree = "<group>";
+		};
+		587658151EEFF32C00FB30AA /* SVMonitor */ = {
+			isa = PBXGroup;
+			children = (
+				587658161EEFF32C00FB30AA /* NetWorkMonitor */,
+				587658191EEFF32C00FB30AA /* SVMonitorActionProtocol.h */,
+				5876581A1EEFF32C00FB30AA /* UIMonitor */,
+				5876581F1EEFF32C00FB30AA /* Utility */,
+			);
+			path = SVMonitor;
+			sourceTree = "<group>";
+		};
+		587658161EEFF32C00FB30AA /* NetWorkMonitor */ = {
+			isa = PBXGroup;
+			children = (
+				587658171EEFF32C00FB30AA /* SVNetWorkMonitor.h */,
+				587658181EEFF32C00FB30AA /* SVNetWorkMonitor.m */,
+			);
+			path = NetWorkMonitor;
+			sourceTree = "<group>";
+		};
+		5876581A1EEFF32C00FB30AA /* UIMonitor */ = {
+			isa = PBXGroup;
+			children = (
+				5876581B1EEFF32C00FB30AA /* SVUIFPSMonitor.h */,
+				5876581C1EEFF32C00FB30AA /* SVUIFPSMonitor.m */,
+				5876581D1EEFF32C00FB30AA /* SVUIPerformanceMonitor.h */,
+				5876581E1EEFF32C00FB30AA /* SVUIPerformanceMonitor.m */,
+			);
+			path = UIMonitor;
+			sourceTree = "<group>";
+		};
+		5876581F1EEFF32C00FB30AA /* Utility */ = {
+			isa = PBXGroup;
+			children = (
+				587658201EEFF32C00FB30AA /* SVBacktraceLogger.h */,
+				587658211EEFF32C00FB30AA /* SVBacktraceLogger.m */,
+				587658221EEFF32C00FB30AA /* SVWeakCycleObject.h */,
+				587658231EEFF32C00FB30AA /* SVWeakCycleObject.m */,
+			);
+			path = Utility;
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXNativeTarget section */
+		587657FA1EEFF31400FB30AA /* GLMonitor */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 587658121EEFF31400FB30AA /* Build configuration list for PBXNativeTarget "GLMonitor" */;
+			buildPhases = (
+				587657F71EEFF31400FB30AA /* Sources */,
+				587657F81EEFF31400FB30AA /* Frameworks */,
+				587657F91EEFF31400FB30AA /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = GLMonitor;
+			productName = GLMonitor;
+			productReference = 587657FB1EEFF31400FB30AA /* GLMonitor.app */;
+			productType = "com.apple.product-type.application";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		587657F31EEFF31400FB30AA /* Project object */ = {
+			isa = PBXProject;
+			attributes = {
+				LastUpgradeCheck = 0830;
+				ORGANIZATIONNAME = ZK;
+				TargetAttributes = {
+					587657FA1EEFF31400FB30AA = {
+						CreatedOnToolsVersion = 8.3;
+						ProvisioningStyle = Automatic;
+					};
+				};
+			};
+			buildConfigurationList = 587657F61EEFF31400FB30AA /* Build configuration list for PBXProject "GLMonitor" */;
+			compatibilityVersion = "Xcode 3.2";
+			developmentRegion = English;
+			hasScannedForEncodings = 0;
+			knownRegions = (
+				en,
+				Base,
+			);
+			mainGroup = 587657F21EEFF31400FB30AA;
+			productRefGroup = 587657FC1EEFF31400FB30AA /* Products */;
+			projectDirPath = "";
+			projectRoot = "";
+			targets = (
+				587657FA1EEFF31400FB30AA /* GLMonitor */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXResourcesBuildPhase section */
+		587657F91EEFF31400FB30AA /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				5876580E1EEFF31400FB30AA /* LaunchScreen.storyboard in Resources */,
+				5876580B1EEFF31400FB30AA /* Assets.xcassets in Resources */,
+				587658091EEFF31400FB30AA /* Main.storyboard in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXResourcesBuildPhase section */
+
+/* Begin PBXSourcesBuildPhase section */
+		587657F71EEFF31400FB30AA /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				587658261EEFF32C00FB30AA /* SVUIPerformanceMonitor.m in Sources */,
+				587658241EEFF32C00FB30AA /* SVNetWorkMonitor.m in Sources */,
+				587658061EEFF31400FB30AA /* ViewController.m in Sources */,
+				587658271EEFF32C00FB30AA /* SVBacktraceLogger.m in Sources */,
+				587658251EEFF32C00FB30AA /* SVUIFPSMonitor.m in Sources */,
+				587658031EEFF31400FB30AA /* AppDelegate.m in Sources */,
+				587658281EEFF32C00FB30AA /* SVWeakCycleObject.m in Sources */,
+				587658001EEFF31400FB30AA /* main.m in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin PBXVariantGroup section */
+		587658071EEFF31400FB30AA /* Main.storyboard */ = {
+			isa = PBXVariantGroup;
+			children = (
+				587658081EEFF31400FB30AA /* Base */,
+			);
+			name = Main.storyboard;
+			sourceTree = "<group>";
+		};
+		5876580C1EEFF31400FB30AA /* LaunchScreen.storyboard */ = {
+			isa = PBXVariantGroup;
+			children = (
+				5876580D1EEFF31400FB30AA /* Base */,
+			);
+			name = LaunchScreen.storyboard;
+			sourceTree = "<group>";
+		};
+/* End PBXVariantGroup section */
+
+/* Begin XCBuildConfiguration section */
+		587658101EEFF31400FB30AA /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = dwarf;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				ENABLE_TESTABILITY = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 10.3;
+				MTL_ENABLE_DEBUG_INFO = YES;
+				ONLY_ACTIVE_ARCH = YES;
+				SDKROOT = iphoneos;
+			};
+			name = Debug;
+		};
+		587658111EEFF31400FB30AA /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				ENABLE_NS_ASSERTIONS = NO;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 10.3;
+				MTL_ENABLE_DEBUG_INFO = NO;
+				SDKROOT = iphoneos;
+				VALIDATE_PRODUCT = YES;
+			};
+			name = Release;
+		};
+		587658131EEFF31400FB30AA /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				INFOPLIST_FILE = GLMonitor/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = gl.GLMonitor;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+			};
+			name = Debug;
+		};
+		587658141EEFF31400FB30AA /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				INFOPLIST_FILE = GLMonitor/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = gl.GLMonitor;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+			};
+			name = Release;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		587657F61EEFF31400FB30AA /* Build configuration list for PBXProject "GLMonitor" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				587658101EEFF31400FB30AA /* Debug */,
+				587658111EEFF31400FB30AA /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		587658121EEFF31400FB30AA /* Build configuration list for PBXNativeTarget "GLMonitor" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				587658131EEFF31400FB30AA /* Debug */,
+				587658141EEFF31400FB30AA /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+/* End XCConfigurationList section */
+	};
+	rootObject = 587657F31EEFF31400FB30AA /* Project object */;
+}
