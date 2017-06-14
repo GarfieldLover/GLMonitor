@@ -9,7 +9,7 @@
 #import <Foundation/Foundation.h>
 #import "SVMonitorActionProtocol.h"
 
-@interface SVNetWorkMonitor : NSObject
+@interface SVNetWorkMonitor : NSObject <SVMonitorActionProtocol>
 
 + (instancetype)sharedNetWorkMonitor;
 

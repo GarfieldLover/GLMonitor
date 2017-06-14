@@ -7,6 +7,7 @@
 //
 
 #import "SVNetWorkMonitor.h"
+#import "SVURLProtocol.h"
 
 static SVNetWorkMonitor* netWorkMonitor = nil;
 
@@ -20,16 +21,14 @@ static SVNetWorkMonitor* netWorkMonitor = nil;
     return netWorkMonitor;
 }
 
-//- (void)startMonitor {
-//    [[UIApplication sharedApplication].keyWindow addSubview:self.fpsLabel];
-//    self.fpsLabel.frame = CGRectMake([UIApplication sharedApplication].keyWindow.bounds.size.width-60, [UIApplication sharedApplication].keyWindow.bounds.size.height-100, 60, 40);
-//    self.displayLink.paused = NO;
-//}
-//
-//- (void)stopMonitor {
-//    [self.fpsLabel removeFromSuperview];
-//    self.displayLink.paused = YES;
-//}
+- (void)startMonitor {
+    [SVURLProtocol setEnabled:YES];
+}
+
+- (void)stopMonitor {
+    [SVURLProtocol setEnabled:NO];
+
+}
 
 
 @end

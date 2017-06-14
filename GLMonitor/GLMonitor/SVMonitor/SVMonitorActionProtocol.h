@@ -7,8 +7,6 @@
 //
 
 #import <Foundation/Foundation.h>
-#import <QuartzCore/QuartzCore.h>
-#import <UIKit/UIKit.h>
 
 @protocol SVMonitorActionProtocol <NSObject>
 
