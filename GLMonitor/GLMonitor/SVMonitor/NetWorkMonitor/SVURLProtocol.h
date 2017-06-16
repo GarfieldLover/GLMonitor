@@ -10,6 +10,8 @@
 
 @interface SVURLProtocol : NSURLProtocol
 
-+ (void)setEnabled:(BOOL)enabled;
++ (void)registerProtocolClass;
+
++ (void)unregisterProtocolClass;
 
 @end

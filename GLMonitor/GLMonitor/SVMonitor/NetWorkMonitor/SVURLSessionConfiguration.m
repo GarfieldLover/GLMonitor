@@ -23,12 +23,12 @@
 }
 
 - (void)swizzleProtocolClasses {
-    Class class = NSClassFromString(@"NSURLSessionConfiguration");
+    Class class = NSClassFromString(@"__NSCFURLSessionConfiguration") ?: NSClassFromString(@"NSURLSessionConfiguration");
     [self swizzleSelector:@selector(protocolClasses) fromClass:class toClass:[self class]];
 }
 
 - (void)unSwizzleProtocolClasses {
-    Class class = NSClassFromString(@"NSURLSessionConfiguration");
+    Class class = NSClassFromString(@"__NSCFURLSessionConfiguration") ?: NSClassFromString(@"NSURLSessionConfiguration");
     [self swizzleSelector:@selector(protocolClasses) fromClass:[self class] toClass:class];
 }
 

@@ -16,7 +16,6 @@
 #define kSQLShortMarks  @"''"
 @interface NEHTTPModelManager(){
     NSMutableArray *allMapRequests;
-
 }
 @end
 
@@ -25,7 +24,6 @@
 - (id)init {
     self = [super init];
     if (self) {
-        self.saveRequestMaxCount=2;
         allRequests = [NSMutableArray arrayWithCapacity:1];
         allMapRequests = [NSMutableArray arrayWithCapacity:1];
         enablePersistent = NO;
@@ -39,23 +37,9 @@
     static dispatch_once_t onceToken;
     dispatch_once(&onceToken, ^{
         staticManager=[[NEHTTPModelManager alloc] init];
-        [staticManager createTable];
     });
     return staticManager;
     
-}
-
-+ (NSString *)filename {
-    NSArray *paths = NSSearchPathForDirectoriesInDomains(NSCachesDirectory, NSUserDomainMask, YES);
-    NSString *ducumentsDirectory = [paths objectAtIndex:0];
-    NSString *str=[[NSString alloc] initWithFormat:@"%@/networkeye.sqlite",ducumentsDirectory];
-    return  str;
-}
-
-- (void)createTable {
-    
-    NSMutableString *init_sqls=[NSMutableString stringWithCapacity:1024];
-    [init_sqls appendFormat:@"create table if not exists nenetworkhttpeyes(myID double primary key,startDateString text,endDateString text,requestURLString text,requestCachePolicy text,requestTimeoutInterval double,requestHTTPMethod text,requestAllHTTPHeaderFields text,requestHTTPBody text,responseMIMEType text,responseExpectedContentLength text,responseTextEncodingName text,responseSuggestedFilename text,responseStatusCode int,responseAllHeaderFields text,receiveJSONData text);"];
 }
 
 - (void)addModel:(NEHTTPModel *) aModel {
@@ -64,33 +48,20 @@
         aModel.receiveJSONData=@"";
     }
     
-    if ([[[NSUserDefaults standardUserDefaults] objectForKey:@"nenetworkhttpeyecache"] isEqualToString:@"a"]) {
-        [self deleteAllItem];
-        [[NSUserDefaults standardUserDefaults] setObject:@"b" forKey:@"nenetworkhttpeyecache"];
-    }
-
     BOOL isNull;
     isNull=(aModel.receiveJSONData==nil);
     if (isNull) {
         aModel.receiveJSONData=@"";
     }
-    NSString *receiveJSONData;
-    receiveJSONData=[self stringToSQLFilter:aModel.receiveJSONData];
     if (enablePersistent) {
     }else {
         [allRequests addObject:aModel];
     }
-    
-    return ;
-    
 }
 
 - (NSMutableArray *)allobjects {
     
     if (!enablePersistent) {
-        if (allRequests.count>=self.saveRequestMaxCount) {
-            [[NSUserDefaults standardUserDefaults] setObject:@"a" forKey:@"nenetworkhttpeyecache"];
-        }
         return allRequests;
     }
     return nil;
@@ -100,7 +71,6 @@
     
     if (!enablePersistent) {
         [allRequests removeAllObjects];
-        return;
     }
 }
 
@@ -137,30 +107,5 @@
     [allMapRequests removeAllObjects];
 }
 
-#pragma mark - Utils
-
-- (id)stringToSQLFilter:(id)str {
-    
-    if ( [str respondsToSelector:@selector(stringByReplacingOccurrencesOfString:withString:)]) {
-        id temp = str;
-        temp = [temp stringByReplacingOccurrencesOfString:kSTRShortMarks withString:kSQLShortMarks];
-        temp = [temp stringByReplacingOccurrencesOfString:kSTRDoubleMarks withString:kSQLDoubleMarks];
-        return temp;
-    }
-    return str;
-    
-}
-
-- (id)stringToOBJFilter:(id)str {
-    
-    if ( [str respondsToSelector:@selector(stringByReplacingOccurrencesOfString:withString:)]) {
-        id temp = str;
-        temp = [temp stringByReplacingOccurrencesOfString:kSQLShortMarks withString:kSTRShortMarks];
-        temp = [temp stringByReplacingOccurrencesOfString:kSQLDoubleMarks withString:kSTRDoubleMarks];
-        return temp;
-    }
-    return str;
-    
-}
 
 @end

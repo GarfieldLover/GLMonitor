@@ -22,11 +22,11 @@ static SVNetWorkMonitor* netWorkMonitor = nil;
 }
 
 - (void)startMonitor {
-    [SVURLProtocol setEnabled:YES];
+    [SVURLProtocol registerProtocolClass];
 }
 
 - (void)stopMonitor {
-    [SVURLProtocol setEnabled:NO];
+    [SVURLProtocol unregisterProtocolClass];
 
 }
 

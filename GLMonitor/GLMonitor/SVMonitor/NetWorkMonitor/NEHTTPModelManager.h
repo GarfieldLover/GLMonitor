@@ -15,28 +15,12 @@
     BOOL enablePersistent;
 }
 
-@property(nonatomic,strong) NSString *sqlitePassword;
-@property(nonatomic,assign) int saveRequestMaxCount;
-
-/**
- *  get recorded requests 's SQLite filename
- *
- *  @return filename
- */
-+ (NSString *)filename;
-
 /**
  *  get NEHTTPModelManager's singleton object
  *
  *  @return singleton object
  */
 + (NEHTTPModelManager *)defaultManager;
-
-/**
- *  create NEHTTPModel table
- */
-- (void)createTable;
-
 
 /**
  *  add a NEHTTPModel object to SQLite
