@@ -8,6 +8,7 @@
 
 #import "SVUIFPSMonitor.h"
 #import "SVWeakCycleObject.h"
+#import "SVMonitorStatusBarView.h"
 
 @interface SVUIFPSMonitor()
 
@@ -38,18 +39,11 @@ static SVUIFPSMonitor* UIFPSMonitor = nil;
     [_displayLink invalidate];
 }
 
-- (instancetype)init {
-    self = [super init];
-    if (self) {
-
-    }
-    return self;
-}
-
 - (void)startMonitor {
-    [[UIApplication sharedApplication].keyWindow addSubview:self.fpsLabel];
-    self.fpsLabel.frame = CGRectMake([UIApplication sharedApplication].keyWindow.bounds.size.width-60, [UIApplication sharedApplication].keyWindow.bounds.size.height-100, 60, 40);
     self.displayLink.paused = NO;
+    
+    self.fpsLabel.frame = CGRectMake(70, 0, 70, 20);
+    [[SVMonitorStatusBarView sharedInstance] addSubview:self.fpsLabel];
 }
 
 - (void)stopMonitor {
@@ -70,10 +64,9 @@ static SVUIFPSMonitor* UIFPSMonitor = nil;
 - (UILabel *)fpsLabel {
     if (!_fpsLabel) {
         _fpsLabel = [[UILabel alloc] init];
-        _fpsLabel.backgroundColor = [[UIColor blackColor] colorWithAlphaComponent:0.3];
-        _fpsLabel.textColor = [UIColor whiteColor];
+        _fpsLabel.textColor = [UIColor blackColor];
         _fpsLabel.textAlignment = NSTextAlignmentCenter;
-        _fpsLabel.font = [UIFont systemFontOfSize:22];
+        _fpsLabel.font = [UIFont boldSystemFontOfSize:12];
     }
     return _fpsLabel;
 }
@@ -86,12 +79,11 @@ static SVUIFPSMonitor* UIFPSMonitor = nil;
         return;
     }
     
-    CGFloat fps = (double)self.displayCount / interval;
+    NSInteger fps = (NSInteger)self.displayCount / interval;
     self.lastTime = self.displayLink.timestamp;
     self.displayCount = 0;
     
-    self.fpsLabel.text = [NSString stringWithFormat:@"%.1f",fps];
-    
+    self.fpsLabel.text = [NSString stringWithFormat:@"FPS: %ld",(long)fps];
 }
 
 @end

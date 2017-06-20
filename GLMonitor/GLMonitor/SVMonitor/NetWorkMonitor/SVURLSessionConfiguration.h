@@ -10,6 +10,11 @@
 
 @interface SVURLSessionConfiguration : NSObject
 
+/**
+ 设置URLSessionConfiguration
+
+ @return 单例
+ */
 + (SVURLSessionConfiguration *)sharedConfiguration;
 
 - (void)swizzleProtocolClasses;
