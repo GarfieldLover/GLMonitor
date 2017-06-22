@@ -8,8 +8,7 @@
 
 #import "SVURLProtocol.h"
 #import "SVURLSessionConfiguration.h"
-#import "NEHTTPModel.h"
-#import "NEHTTPModelManager.h"
+#import "SVHTTPRequestModel.h"
 
 
 @interface SVURLProtocol ()<NSURLConnectionDelegate, NSURLConnectionDataDelegate>
@@ -22,7 +21,7 @@
 
 @property (nonatomic, strong) NSDate *startDate;
 
-@property (nonatomic,strong) NEHTTPModel *ne_HTTPModel;
+@property (nonatomic,strong) SVHTTPRequestModel *ne_HTTPModel;
 
 @end
 
@@ -66,7 +65,7 @@
     self.connection = [[NSURLConnection alloc] initWithRequest:[[self class] canonicalRequestForRequest:self.request] delegate:self startImmediately:YES];
 #pragma clang diagnostic pop
     
-    self.ne_HTTPModel=[[NEHTTPModel alloc] init];
+    self.ne_HTTPModel=[[SVHTTPRequestModel alloc] init];
     self.ne_HTTPModel.ne_request=self.request;
     self.ne_HTTPModel.startDateString=[self stringWithDate:[NSDate date]];
     
@@ -148,7 +147,7 @@
     if ([mimeType isEqualToString:@"application/json"]) {
         NSArray *allMapRequests = [[NEHTTPModelManager defaultManager] allMapObjects];
         for (NSInteger i=0; i < allMapRequests.count; i++) {
-            NEHTTPModel *req = [allMapRequests objectAtIndex:i];
+            SVHTTPRequestModel *req = [allMapRequests objectAtIndex:i];
             if ([[self.ne_HTTPModel.ne_request.URL absoluteString] containsString:req.mapPath]) {
                 NSData *jsonData = [req.mapJSONData dataUsingEncoding:NSUTF8StringEncoding];
                 [[self client] URLProtocol:self didLoadData:jsonData];

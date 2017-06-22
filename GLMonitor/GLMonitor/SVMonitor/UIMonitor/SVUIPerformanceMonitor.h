@@ -9,7 +9,7 @@
 #import <Foundation/Foundation.h>
 #import "SVMonitorActionProtocol.h"
 
-@interface SVUIPerformanceMonitor : NSObject
+@interface SVUIPerformanceMonitor : NSObject <SVMonitorActionProtocol>
 
 @property (nonatomic, assign) BOOL LaunchViewControllerRealDismiss;
 

@@ -8,8 +8,7 @@
 
 #import "NEHTTPEyeViewController.h"
 
-#import "NEHTTPModel.h"
-#import "NEHTTPModelManager.h"
+#import "SVHTTPRequestModel.h"
 #import "NEHTTPEyeDetailViewController.h"
 
 @interface NEHTTPEyeViewController ()<UITableViewDataSource,UITableViewDelegate,UISearchDisplayDelegate,UISearchBarDelegate> {
@@ -155,7 +154,7 @@
     }
     cell.textLabel.font=[UIFont systemFontOfSize:12];
     cell.textLabel.textColor=[UIColor colorWithRed:0.24f green:0.51f blue:0.78f alpha:1.00f];
-    NEHTTPModel *currenModel=[self modelForTableView:tableView atIndexPath:indexPath];
+    SVHTTPRequestModel *currenModel=[self modelForTableView:tableView atIndexPath:indexPath];
     
     cell.textLabel.text=currenModel.requestURLString;
 
@@ -174,7 +173,7 @@
                                                                           NSForegroundColorAttributeName: titleColor
                                                                           }];
     
-    requestHTTPMethod = [[NSMutableAttributedString alloc] initWithString:[NSString stringWithFormat:@"%@   %@   %@",currenModel.requestHTTPMethod,currenModel.responseMIMEType,[((NEHTTPModel *)((httpRequests)[indexPath.row])).startDateString substringFromIndex:5]]
+    requestHTTPMethod = [[NSMutableAttributedString alloc] initWithString:[NSString stringWithFormat:@"%@   %@   %@",currenModel.requestHTTPMethod,currenModel.responseMIMEType,[((SVHTTPRequestModel *)((httpRequests)[indexPath.row])).startDateString substringFromIndex:5]]
                                                            attributes:@{
                                                                         NSFontAttributeName : detailFont,
                                                                         NSForegroundColorAttributeName: detailColor
@@ -236,7 +235,7 @@
 
 - (void)updateSearchResultsWithSearchString:(NSString *)searchString {
     dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
-        NSArray *tempFilterHTTPRequests = [httpRequests filteredArrayUsingPredicate:[NSPredicate predicateWithBlock:^BOOL(NEHTTPModel *httpRequest, NSDictionary *bindings) {
+        NSArray *tempFilterHTTPRequests = [httpRequests filteredArrayUsingPredicate:[NSPredicate predicateWithBlock:^BOOL(SVHTTPRequestModel *httpRequest, NSDictionary *bindings) {
             return [[NSString stringWithFormat:@"%@ %d %@ %@",httpRequest.requestURLString,httpRequest.responseStatusCode,httpRequest.requestHTTPMethod,httpRequest.responseMIMEType] rangeOfString:searchString options:NSCaseInsensitiveSearch].length > 0;
         }]];
         
@@ -255,12 +254,12 @@
 }
 
 #pragma mark - private methods
-- (NEHTTPModel *)modelForTableView:(UITableView *)tableView atIndexPath:(NSIndexPath *)indexPath {
-    NEHTTPModel *currenModel=[[NEHTTPModel alloc] init];
+- (SVHTTPRequestModel *)modelForTableView:(UITableView *)tableView atIndexPath:(NSIndexPath *)indexPath {
+    SVHTTPRequestModel *currenModel=[[SVHTTPRequestModel alloc] init];
     if (tableView == mySearchDisplayController.searchResultsTableView) {
-        currenModel=(NEHTTPModel *)((filterHTTPRequests)[indexPath.row]);
+        currenModel=(SVHTTPRequestModel *)((filterHTTPRequests)[indexPath.row]);
     }else{
-        currenModel=(NEHTTPModel *)((httpRequests)[indexPath.row]);
+        currenModel=(SVHTTPRequestModel *)((httpRequests)[indexPath.row]);
     }
     return currenModel;
 }

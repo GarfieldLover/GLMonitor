@@ -92,7 +92,7 @@ static void runLoopObserverCallBack(CFRunLoopObserverRef observer, CFRunLoopActi
                         continue;
                     if([SVUIPerformanceMonitor sharedInstance].LaunchViewControllerRealDismiss) {
                         NSException* exception =[NSException exceptionWithName:@"--------------UI卡顿了--------------" reason:[SVBacktraceLogger sv_backtraceOfMainThread] userInfo:nil];
-                        [exception raise];
+//                        [exception raise];
                     }
                 }//end activity
             }// end semaphore wait

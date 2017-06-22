@@ -1,14 +1,15 @@
 //
-//  NEHTTPModel.h
-//  NetworkEye
+//  SVHTTPRequestModel.h
+//  Utility
 //
-//  Created by coderyi on 15/11/4.
-//  Copyright © 2015年 coderyi. All rights reserved.
+//  Created by ZK on 2017/6/22.
+//
 //
 
 #import <Foundation/Foundation.h>
+
 NS_ASSUME_NONNULL_BEGIN
-@interface NEHTTPModel : NSObject
+@interface SVHTTPRequestModel : NSObject
 
 @property (nonatomic,strong) NSURLRequest *ne_request;
 @property (nonatomic,strong) NSHTTPURLResponse *ne_response;
@@ -40,3 +41,43 @@ NS_ASSUME_NONNULL_BEGIN
 
 @end
 NS_ASSUME_NONNULL_END
+
+
+@interface NEHTTPModelManager : NSObject
+{
+    NSMutableArray *allRequests;
+    BOOL enablePersistent;
+}
+
+/**
+ *  get NEHTTPModelManager's singleton object
+ *
+ *  @return singleton object
+ */
++ (NEHTTPModelManager *)defaultManager;
+
+/**
+ *  add a SVHTTPRequestModel object to SQLite
+ *
+ *  @param aModel a SVHTTPRequestModel object
+ */
+- (void)addModel:(SVHTTPRequestModel *) aModel;
+
+/**
+ *  get SQLite all SVHTTPRequestModel object
+ *
+ *  @return all SVHTTPRequestModel object
+ */
+- (NSMutableArray *)allobjects;
+
+/**
+ *  delete all SQLite records
+ */
+- (void) deleteAllItem;
+
+- (NSMutableArray *)allMapObjects;
+- (void)addMapObject:(SVHTTPRequestModel *)mapReq;
+- (void)removeMapObject:(SVHTTPRequestModel *)mapReq;
+- (void)removeAllMapObjects;
+
+@end

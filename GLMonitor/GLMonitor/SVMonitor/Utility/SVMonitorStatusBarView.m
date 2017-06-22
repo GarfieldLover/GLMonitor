@@ -23,19 +23,20 @@
 - (instancetype)init {
     self = [super init];
     if (self) {
-        self.backgroundColor = [UIColor clearColor];
+        self.backgroundColor = [UIColor blackColor];
         self.windowLevel = UIWindowLevelStatusBar + 1.0;
         
         self.rootViewController = [[SVMonitorStatusBarRootController alloc] init];
         self.hidden = NO;
                 
         UIWindow* keyWindow = [[UIApplication sharedApplication] keyWindow];
-        self.frame = CGRectMake(0, 0, keyWindow.bounds.size.width, 20);
+        self.frame = CGRectMake(keyWindow.bounds.size.width/4, 2, keyWindow.bounds.size.width/2, 16);
         self.autoresizingMask = UIViewAutoresizingFlexibleLeftMargin | UIViewAutoresizingFlexibleRightMargin | UIViewAutoresizingFlexibleWidth;
+        self.layer.cornerRadius = 8;
+        self.layer.masksToBounds = YES;
         
-        [keyWindow addSubview:self];
         
-        [[UIApplication sharedApplication] addObserver:self forKeyPath:@"statusBarStyle" options:NSKeyValueObservingOptionNew context:nil];
+//        [[UIApplication sharedApplication] addObserver:self forKeyPath:@"statusBarStyle" options:NSKeyValueObservingOptionNew context:nil];
     }
     return self;
 }

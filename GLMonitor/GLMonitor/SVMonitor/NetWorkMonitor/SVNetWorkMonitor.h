@@ -11,6 +11,6 @@
 
 @interface SVNetWorkMonitor : NSObject <SVMonitorActionProtocol>
 
-+ (instancetype)sharedNetWorkMonitor;
++ (instancetype)sharedInstance;
 
 @end

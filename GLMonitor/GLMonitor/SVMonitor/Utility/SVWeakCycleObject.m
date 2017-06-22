@@ -35,5 +35,50 @@
     return [NSObject instanceMethodSignatureForSelector:@selector(init)];
 }
 
+- (BOOL)isProxy {
+    return YES;
+}
+
+- (Class)class {
+    return [_target class];
+}
+
+- (Class)superclass {
+    return [_target superclass];
+}
+
+- (NSUInteger)hash {
+    return [_target hash];
+}
+
+- (NSString *)description {
+    return [_target description];
+}
+
+- (NSString *)debugDescription {
+    return [_target debugDescription];
+}
+
+- (BOOL)isEqual: (id)object {
+    return [_target isEqual: object];
+}
+
+- (BOOL)isKindOfClass: (Class)aClass {
+    return [_target isKindOfClass: aClass];
+}
+
+- (BOOL)isMemberOfClass: (Class)aClass {
+    return [_target isMemberOfClass: aClass];
+}
+
+- (BOOL)respondsToSelector: (SEL)aSelector {
+    return [_target respondsToSelector: aSelector];
+}
+
+- (BOOL)conformsToProtocol: (Protocol *)aProtocol {
+    return [_target conformsToProtocol: aProtocol];
+}
+
+
 
 @end

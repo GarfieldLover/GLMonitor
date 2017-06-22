@@ -7,7 +7,7 @@
 //
 
 #import "NEHTTPEyeDetailViewController.h"
-#import "NEHTTPModel.h"
+#import "SVHTTPRequestModel.h"
 @interface NEHTTPEyeDetailViewController (){
 
     UITextView *mainTextView;

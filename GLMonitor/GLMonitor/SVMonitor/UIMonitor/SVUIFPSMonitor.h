@@ -11,6 +11,6 @@
 
 @interface SVUIFPSMonitor : NSObject <SVMonitorActionProtocol>
 
-+ (instancetype)sharedUIFPSMonitor;
++ (instancetype)sharedInstance;
 
 @end

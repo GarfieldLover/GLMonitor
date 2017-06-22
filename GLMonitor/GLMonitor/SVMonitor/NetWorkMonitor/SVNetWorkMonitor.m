@@ -13,7 +13,7 @@ static SVNetWorkMonitor* netWorkMonitor = nil;
 
 @implementation SVNetWorkMonitor
 
-+ (instancetype)sharedNetWorkMonitor {
++ (instancetype)sharedInstance {
     static dispatch_once_t once;
     dispatch_once(&once, ^{
         netWorkMonitor = [[SVNetWorkMonitor alloc] init];

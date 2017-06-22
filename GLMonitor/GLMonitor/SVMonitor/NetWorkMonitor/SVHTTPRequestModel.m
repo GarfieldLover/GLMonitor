@@ -1,14 +1,14 @@
 //
-//  NEHTTPModel.m
-//  NetworkEye
+//  SVHTTPRequestModel.m
+//  Utility
 //
-//  Created by coderyi on 15/11/4.
-//  Copyright © 2015年 coderyi. All rights reserved.
+//  Created by ZK on 2017/6/22.
+//
 //
 
-#import "NEHTTPModel.h"
+#import "SVHTTPRequestModel.h"
 
-@implementation NEHTTPModel
+@implementation SVHTTPRequestModel
 @synthesize ne_request,ne_response;
 
 -(void)setNe_request:(NSURLRequest *)ne_request_new{
@@ -55,7 +55,7 @@
             self.requestAllHTTPHeaderFields=[self.requestAllHTTPHeaderFields substringFromIndex:6];
         }
     }
-
+    
     if ([ne_request HTTPBody].length>512) {
         self.requestHTTPBody=@"requestHTTPBody too long";
     }else{
@@ -104,5 +104,108 @@
     }
     
 }
+
+
+@end
+
+
+
+#define kSTRDoubleMarks @"\""
+#define kSQLDoubleMarks @"\"\""
+#define kSTRShortMarks  @"'"
+#define kSQLShortMarks  @"''"
+@interface NEHTTPModelManager(){
+    NSMutableArray *allMapRequests;
+}
+@end
+
+@implementation NEHTTPModelManager
+
+- (id)init {
+    self = [super init];
+    if (self) {
+        allRequests = [NSMutableArray arrayWithCapacity:1];
+        allMapRequests = [NSMutableArray arrayWithCapacity:1];
+        enablePersistent = NO;
+    }
+    return self;
+}
+
++ (NEHTTPModelManager *)defaultManager {
+    
+    static NEHTTPModelManager *staticManager;
+    static dispatch_once_t onceToken;
+    dispatch_once(&onceToken, ^{
+        staticManager=[[NEHTTPModelManager alloc] init];
+    });
+    return staticManager;
+    
+}
+
+- (void)addModel:(SVHTTPRequestModel *) aModel {
+    
+    if ([aModel.responseMIMEType isEqualToString:@"text/html"]) {
+        aModel.receiveJSONData=@"";
+    }
+    
+    BOOL isNull;
+    isNull=(aModel.receiveJSONData==nil);
+    if (isNull) {
+        aModel.receiveJSONData=@"";
+    }
+    if (enablePersistent) {
+    }else {
+        [allRequests addObject:aModel];
+    }
+}
+
+- (NSMutableArray *)allobjects {
+    
+    if (!enablePersistent) {
+        return allRequests;
+    }
+    return nil;
+}
+
+- (void) deleteAllItem {
+    
+    if (!enablePersistent) {
+        [allRequests removeAllObjects];
+    }
+}
+
+#pragma mark - map local
+
+- (NSMutableArray *)allMapObjects {
+    return allMapRequests;
+}
+
+- (void)addMapObject:(SVHTTPRequestModel *)mapReq {
+    
+    for (NSInteger i=0; i < allMapRequests.count; i++) {
+        SVHTTPRequestModel *req = [allMapRequests objectAtIndex:i];
+        if (![mapReq.mapPath isEqualToString:req.mapPath]) {
+            [allMapRequests replaceObjectAtIndex:i withObject:mapReq];
+            return;
+        }
+    }
+    [allMapRequests addObject:mapReq];
+}
+
+- (void)removeMapObject:(SVHTTPRequestModel *)mapReq {
+    
+    for (NSInteger i=0; i < allMapRequests.count; i++) {
+        SVHTTPRequestModel *req = [allMapRequests objectAtIndex:i];
+        if ([mapReq.mapPath isEqualToString:req.mapPath]) {
+            [allMapRequests removeObject:mapReq];
+            return;
+        }
+    }
+}
+
+- (void)removeAllMapObjects {
+    [allMapRequests removeAllObjects];
+}
+
 
 @end

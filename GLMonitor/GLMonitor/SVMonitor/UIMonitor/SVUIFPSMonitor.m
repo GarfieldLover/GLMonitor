@@ -27,7 +27,7 @@ static SVUIFPSMonitor* UIFPSMonitor = nil;
 
 @implementation SVUIFPSMonitor
 
-+ (instancetype)sharedUIFPSMonitor {
++ (instancetype)sharedInstance {
     static dispatch_once_t once;
     dispatch_once(&once, ^{
         UIFPSMonitor = [[SVUIFPSMonitor alloc] init];
@@ -42,7 +42,7 @@ static SVUIFPSMonitor* UIFPSMonitor = nil;
 - (void)startMonitor {
     self.displayLink.paused = NO;
     
-    self.fpsLabel.frame = CGRectMake(70, 0, 70, 20);
+    self.fpsLabel.frame = CGRectMake(5, 0, 60, [SVMonitorStatusBarView sharedInstance].bounds.size.height);
     [[SVMonitorStatusBarView sharedInstance] addSubview:self.fpsLabel];
 }
 
@@ -64,9 +64,8 @@ static SVUIFPSMonitor* UIFPSMonitor = nil;
 - (UILabel *)fpsLabel {
     if (!_fpsLabel) {
         _fpsLabel = [[UILabel alloc] init];
-        _fpsLabel.textColor = [UIColor blackColor];
-        _fpsLabel.textAlignment = NSTextAlignmentCenter;
-        _fpsLabel.font = [UIFont boldSystemFontOfSize:12];
+        _fpsLabel.textColor = [UIColor whiteColor];
+        _fpsLabel.font = [UIFont boldSystemFontOfSize:10];
     }
     return _fpsLabel;
 }
