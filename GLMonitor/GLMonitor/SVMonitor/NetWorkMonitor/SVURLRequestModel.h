@@ -1,15 +1,14 @@
 //
-//  SVHTTPRequestModel.h
+//  SVURLRequestModel.h
 //  Utility
 //
-//  Created by ZK on 2017/6/22.
+//  Created by ZK on 2017/6/23.
 //
 //
 
 #import <Foundation/Foundation.h>
 
-NS_ASSUME_NONNULL_BEGIN
-@interface SVHTTPRequestModel : NSObject
+@interface SVURLRequestModel : NSObject
 
 @property (nonatomic,strong) NSURLRequest *ne_request;
 @property (nonatomic,strong) NSHTTPURLResponse *ne_response;
@@ -21,17 +20,17 @@ NS_ASSUME_NONNULL_BEGIN
 @property (nonatomic,strong) NSString *requestURLString;
 @property (nonatomic,strong) NSString *requestCachePolicy;
 @property (nonatomic,assign) double requestTimeoutInterval;
-@property (nonatomic,nullable, strong) NSString *requestHTTPMethod;
-@property (nonatomic,nullable,strong) NSString *requestAllHTTPHeaderFields;
-@property (nonatomic,nullable,strong) NSString *requestHTTPBody;
+@property (nonatomic, strong) NSString *requestHTTPMethod;
+@property (nonatomic,strong) NSString *requestAllHTTPHeaderFields;
+@property (nonatomic,strong) NSString *requestHTTPBody;
 
 //response
-@property (nonatomic,nullable,strong) NSString *responseMIMEType;
+@property (nonatomic,strong) NSString *responseMIMEType;
 @property (nonatomic,strong) NSString * responseExpectedContentLength;
-@property (nonatomic,nullable,strong) NSString *responseTextEncodingName;
-@property (nullable, nonatomic, strong) NSString *responseSuggestedFilename;
+@property (nonatomic,strong) NSString *responseTextEncodingName;
+@property (nonatomic, strong) NSString *responseSuggestedFilename;
 @property (nonatomic,assign) int responseStatusCode;
-@property (nonatomic,nullable,strong) NSString *responseAllHeaderFields;
+@property (nonatomic,strong) NSString *responseAllHeaderFields;
 
 //JSONData
 @property (nonatomic,strong) NSString *receiveJSONData;
@@ -39,11 +38,11 @@ NS_ASSUME_NONNULL_BEGIN
 @property (nonatomic,strong) NSString *mapPath;
 @property (nonatomic,strong) NSString *mapJSONData;
 
+
 @end
-NS_ASSUME_NONNULL_END
 
 
-@interface NEHTTPModelManager : NSObject
+@interface SVURLRequestModelManager : NSObject
 {
     NSMutableArray *allRequests;
     BOOL enablePersistent;
@@ -54,19 +53,19 @@ NS_ASSUME_NONNULL_END
  *
  *  @return singleton object
  */
-+ (NEHTTPModelManager *)defaultManager;
++ (SVURLRequestModelManager *)defaultManager;
 
 /**
- *  add a SVHTTPRequestModel object to SQLite
+ *  add a SVURLRequestModel object to SQLite
  *
- *  @param aModel a SVHTTPRequestModel object
+ *  @param aModel a SVURLRequestModel object
  */
-- (void)addModel:(SVHTTPRequestModel *) aModel;
+- (void)addModel:(SVURLRequestModel *) aModel;
 
 /**
- *  get SQLite all SVHTTPRequestModel object
+ *  get SQLite all SVURLRequestModel object
  *
- *  @return all SVHTTPRequestModel object
+ *  @return all SVURLRequestModel object
  */
 - (NSMutableArray *)allobjects;
 
@@ -76,8 +75,9 @@ NS_ASSUME_NONNULL_END
 - (void) deleteAllItem;
 
 - (NSMutableArray *)allMapObjects;
-- (void)addMapObject:(SVHTTPRequestModel *)mapReq;
-- (void)removeMapObject:(SVHTTPRequestModel *)mapReq;
+- (void)addMapObject:(SVURLRequestModel *)mapReq;
+- (void)removeMapObject:(SVURLRequestModel *)mapReq;
 - (void)removeAllMapObjects;
 
 @end
+

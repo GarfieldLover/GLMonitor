@@ -8,8 +8,10 @@
 
 #import "SVURLProtocol.h"
 #import "SVURLSessionConfiguration.h"
-#import "SVHTTPRequestModel.h"
+#import "SVURLRequestModel.h"
 
+#import "LXDHostMapper.h"
+#import "LXDHostFilterRule.h"
 
 @interface SVURLProtocol ()<NSURLConnectionDelegate, NSURLConnectionDataDelegate>
 
@@ -21,7 +23,7 @@
 
 @property (nonatomic, strong) NSDate *startDate;
 
-@property (nonatomic,strong) SVHTTPRequestModel *ne_HTTPModel;
+@property (nonatomic,strong) SVURLRequestModel *ne_HTTPModel;
 
 @end
 
@@ -51,9 +53,22 @@
 
 + (NSURLRequest *)canonicalRequestForRequest:(NSURLRequest *)request {
     
-    NSMutableURLRequest *mutableReqeust = [request mutableCopy];
-    [NSURLProtocol setProperty:@YES forKey:@"SVURLProtocol" inRequest:mutableReqeust];
-    return [mutableReqeust copy];
+    NSString * host = request.URL.host;
+    NSString * ip = [LXDHostMapper parseHost: host];
+    if (ip == nil) { return request; }
+    if ([LXDHostFilterRule isIpInvalid: ip]) { return request; }
+    
+    NSString * absoluteURLString = request.URL.absoluteString;
+    NSRange range = [absoluteURLString rangeOfString: host];
+    if (range.location == NSNotFound) { return request; }
+    
+    absoluteURLString = [absoluteURLString stringByReplacingCharactersInRange: range withString: ip];
+    NSMutableURLRequest * canonicalRequest = request.mutableCopy;
+    
+    [NSURLProtocol setProperty:@YES forKey:@"SVURLProtocol" inRequest:canonicalRequest];
+    
+    canonicalRequest.URL = [NSURL URLWithString: absoluteURLString];
+    return canonicalRequest;
 }
 
 - (void)startLoading {
@@ -65,7 +80,7 @@
     self.connection = [[NSURLConnection alloc] initWithRequest:[[self class] canonicalRequestForRequest:self.request] delegate:self startImmediately:YES];
 #pragma clang diagnostic pop
     
-    self.ne_HTTPModel=[[SVHTTPRequestModel alloc] init];
+    self.ne_HTTPModel=[[SVURLRequestModel alloc] init];
     self.ne_HTTPModel.ne_request=self.request;
     self.ne_HTTPModel.startDateString=[self stringWithDate:[NSDate date]];
     
@@ -107,7 +122,7 @@
             self.ne_HTTPModel.receiveJSONData = xmlString;
         }
     }
-    [[NEHTTPModelManager defaultManager] addModel:self.ne_HTTPModel];
+    [[SVURLRequestModelManager defaultManager] addModel:self.ne_HTTPModel];
 }
 
 #pragma mark - NSURLConnectionDelegate
@@ -138,6 +153,25 @@
 }
 
 - (void)connection:(NSURLConnection *)connection didReceiveResponse:(NSURLResponse *)response {
+  
+    if ([response isKindOfClass: [NSHTTPURLResponse class]]) {
+        NSHTTPURLResponse * httpResponse = (NSHTTPURLResponse *)response;
+        if (httpResponse.statusCode == 404) {
+            NSString * host = response.URL.host;
+            if ([LXDHostMapper validIp: host]) {
+                [connection cancel];
+                [LXDHostFilterRule registerInvailIp: host];
+                
+//                NSString * absoluteURLString = response.URL.absoluteString;
+//                NSRange range = [absoluteURLString rangeOfString: host];
+//                if (range.location != NSNotFound) {
+//                    absoluteURLString = [absoluteURLString stringByReplacingCharactersInRange: range withString: [LXDHostFilterRule getHostFromIpAddress: host]];
+//                    lxd_invalid_ip_handle([NSURL URLWithString: absoluteURLString]);
+//                }
+            }
+        }
+    }
+    
     [[self client] URLProtocol:self didReceiveResponse:response cacheStoragePolicy:NSURLCacheStorageAllowed];
     self.response = response;
 }
@@ -145,9 +179,9 @@
 - (void)connection:(NSURLConnection *)connection didReceiveData:(NSData *)data {
     NSString *mimeType = self.response.MIMEType;
     if ([mimeType isEqualToString:@"application/json"]) {
-        NSArray *allMapRequests = [[NEHTTPModelManager defaultManager] allMapObjects];
+        NSArray *allMapRequests = [[SVURLRequestModelManager defaultManager] allMapObjects];
         for (NSInteger i=0; i < allMapRequests.count; i++) {
-            SVHTTPRequestModel *req = [allMapRequests objectAtIndex:i];
+            SVURLRequestModel *req = [allMapRequests objectAtIndex:i];
             if ([[self.ne_HTTPModel.ne_request.URL absoluteString] containsString:req.mapPath]) {
                 NSData *jsonData = [req.mapJSONData dataUsingEncoding:NSUTF8StringEncoding];
                 [[self client] URLProtocol:self didLoadData:jsonData];

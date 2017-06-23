@@ -1,17 +1,17 @@
 //
-//  NEHTTPEyeViewController.m
-//  NetworkEye
+//  SVURLRequestListViewController.m
+//  Utility
 //
-//  Created by coderyi on 15/11/4.
-//  Copyright © 2015年 coderyi. All rights reserved.
+//  Created by ZK on 2017/6/23.
+//
 //
 
-#import "NEHTTPEyeViewController.h"
+#import "SVURLRequestListViewController.h"
+#import "SVURLRequestModel.h"
+#import "SVURLRequestDetailViewController.h"
 
-#import "SVHTTPRequestModel.h"
-#import "NEHTTPEyeDetailViewController.h"
 
-@interface NEHTTPEyeViewController ()<UITableViewDataSource,UITableViewDelegate,UISearchDisplayDelegate,UISearchBarDelegate> {
+@interface SVURLRequestListViewController ()<UITableViewDataSource,UITableViewDelegate,UISearchDisplayDelegate,UISearchBarDelegate> {
     UITableView *mainTableView;
     NSArray *httpRequests;
     UISearchBar *mySearchBar;
@@ -21,13 +21,14 @@
 
 @end
 
-@implementation NEHTTPEyeViewController
+
+@implementation SVURLRequestListViewController
 
 - (void)viewDidLoad {
     [super viewDidLoad];
     // Do any additional setup after loading the view.
     
-  
+    
     self.automaticallyAdjustsScrollViewInsets=NO;
     self.view.backgroundColor=[UIColor whiteColor];
     
@@ -43,7 +44,7 @@
     UIColor *detailColor=[UIColor whiteColor];
     UIFont *detailFont=[UIFont systemFontOfSize:12.0];
     
-    NSMutableAttributedString *titleString = [[NSMutableAttributedString alloc] initWithString:@"NetworkEye\n"
+    NSMutableAttributedString *titleString = [[NSMutableAttributedString alloc] initWithString:@"网络请求监控\n"
                                                                                     attributes:@{
                                                                                                  NSFontAttributeName : titleFont,
                                                                                                  NSForegroundColorAttributeName: titleColor
@@ -78,38 +79,24 @@
         [backBt setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
         [backBt addTarget:self action:@selector(backBtAction) forControlEvents:UIControlEventTouchUpInside];
         [bar addSubview:backBt];
-        
-        UIButton *settingsBt=[UIButton buttonWithType:UIButtonTypeCustom];
-        settingsBt.frame=CGRectMake([[UIScreen mainScreen] bounds].size.width-60, 27, 50, 30);
-        [settingsBt setTitle:@"settings" forState:UIControlStateNormal];
-        settingsBt.titleLabel.font=[UIFont systemFontOfSize:13];
-        [settingsBt setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
-        [settingsBt addTarget:self action:@selector(rightAction) forControlEvents:UIControlEventTouchUpInside];
-        [bar addSubview:settingsBt];
+    
         mainTableView.frame=CGRectMake(0, 64, [[UIScreen mainScreen] bounds].size.width, [[UIScreen mainScreen] bounds].size.height-64);
         [bar addSubview:titleText];
     }else{
         titleText.frame=CGRectMake(([[UIScreen mainScreen] bounds].size.width-120)/2, 0, 120, 44);
         [self.navigationController.navigationBar addSubview:titleText];
-        UIBarButtonItem *right=[[UIBarButtonItem alloc] initWithTitle:@"settings" style:UIBarButtonItemStylePlain target:self action:@selector(rightAction)];
-        self.navigationItem.rightBarButtonItem=right;
     }
-
+    
     [self setupSearch];
     mainTableView.dataSource=self;
     mainTableView.delegate=self;
-    httpRequests=[[[[NEHTTPModelManager defaultManager] allobjects] reverseObjectEnumerator] allObjects];
+    httpRequests=[[[[SVURLRequestModelManager defaultManager] allobjects] reverseObjectEnumerator] allObjects];
 }
 
 - (void)viewWillAppear:(BOOL)animated {
     [super viewWillAppear:animated];
-    httpRequests=[[[[NEHTTPModelManager defaultManager] allobjects] reverseObjectEnumerator] allObjects];
+    httpRequests=[[[[SVURLRequestModelManager defaultManager] allobjects] reverseObjectEnumerator] allObjects];
     [mainTableView reloadData];
-}
-
-- (void)rightAction {
-//    NEHTTPEyeSettingsViewController *settings = [[NEHTTPEyeSettingsViewController alloc] init];
-//    [self presentViewController:settings animated:YES completion:nil];
 }
 
 - (void)setupSearch {
@@ -125,12 +112,12 @@
     [mySearchDisplayController setDelegate:self];
     [mySearchDisplayController setSearchResultsDataSource:self];
     [mySearchDisplayController setSearchResultsDelegate:self];
-
+    
 }
 - (void)backBtAction {
     
     [self dismissViewControllerAnimated:YES completion:nil];
-
+    
 }
 
 #pragma mark - UITableViewDataSource  &UITableViewDelegate
@@ -154,10 +141,10 @@
     }
     cell.textLabel.font=[UIFont systemFontOfSize:12];
     cell.textLabel.textColor=[UIColor colorWithRed:0.24f green:0.51f blue:0.78f alpha:1.00f];
-    SVHTTPRequestModel *currenModel=[self modelForTableView:tableView atIndexPath:indexPath];
+    SVURLRequestModel *currenModel=[self modelForTableView:tableView atIndexPath:indexPath];
     
     cell.textLabel.text=currenModel.requestURLString;
-
+    
     NSAttributedString *responseStatusCode;
     NSAttributedString *requestHTTPMethod;
     UIColor *titleColor=[UIColor colorWithRed:0.96 green:0.15 blue:0.11 alpha:1];
@@ -168,16 +155,16 @@
     UIColor *detailColor=[UIColor blackColor];
     UIFont *detailFont=[UIFont systemFontOfSize:12.0];
     responseStatusCode = [[NSMutableAttributedString alloc] initWithString:[NSString stringWithFormat:@"%d   ",currenModel.responseStatusCode]
-                                                             attributes:@{
-                                                                          NSFontAttributeName : titleFont,
-                                                                          NSForegroundColorAttributeName: titleColor
-                                                                          }];
+                                                                attributes:@{
+                                                                             NSFontAttributeName : titleFont,
+                                                                             NSForegroundColorAttributeName: titleColor
+                                                                             }];
     
-    requestHTTPMethod = [[NSMutableAttributedString alloc] initWithString:[NSString stringWithFormat:@"%@   %@   %@",currenModel.requestHTTPMethod,currenModel.responseMIMEType,[((SVHTTPRequestModel *)((httpRequests)[indexPath.row])).startDateString substringFromIndex:5]]
-                                                           attributes:@{
-                                                                        NSFontAttributeName : detailFont,
-                                                                        NSForegroundColorAttributeName: detailColor
-                                                                        }];
+    requestHTTPMethod = [[NSMutableAttributedString alloc] initWithString:[NSString stringWithFormat:@"%@   %@   %@",currenModel.requestHTTPMethod,currenModel.responseMIMEType,[((SVURLRequestModel *)((httpRequests)[indexPath.row])).startDateString substringFromIndex:5]]
+                                                               attributes:@{
+                                                                            NSFontAttributeName : detailFont,
+                                                                            NSForegroundColorAttributeName: detailColor
+                                                                            }];
     NSMutableAttributedString *detail=[[NSMutableAttributedString alloc] init];
     [detail appendAttributedString:responseStatusCode];
     [detail appendAttributedString:requestHTTPMethod];
@@ -187,7 +174,7 @@
     
 }
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
-    NEHTTPEyeDetailViewController *detail = [[NEHTTPEyeDetailViewController alloc] init];
+    SVURLRequestDetailViewController *detail = [[SVURLRequestDetailViewController alloc] init];
     detail.model = [self modelForTableView:tableView atIndexPath:indexPath];
     [self presentViewController:detail animated:YES completion:nil];
 }
@@ -235,7 +222,7 @@
 
 - (void)updateSearchResultsWithSearchString:(NSString *)searchString {
     dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
-        NSArray *tempFilterHTTPRequests = [httpRequests filteredArrayUsingPredicate:[NSPredicate predicateWithBlock:^BOOL(SVHTTPRequestModel *httpRequest, NSDictionary *bindings) {
+        NSArray *tempFilterHTTPRequests = [httpRequests filteredArrayUsingPredicate:[NSPredicate predicateWithBlock:^BOOL(SVURLRequestModel *httpRequest, NSDictionary *bindings) {
             return [[NSString stringWithFormat:@"%@ %d %@ %@",httpRequest.requestURLString,httpRequest.responseStatusCode,httpRequest.requestHTTPMethod,httpRequest.responseMIMEType] rangeOfString:searchString options:NSCaseInsensitiveSearch].length > 0;
         }]];
         
@@ -254,12 +241,12 @@
 }
 
 #pragma mark - private methods
-- (SVHTTPRequestModel *)modelForTableView:(UITableView *)tableView atIndexPath:(NSIndexPath *)indexPath {
-    SVHTTPRequestModel *currenModel=[[SVHTTPRequestModel alloc] init];
+- (SVURLRequestModel *)modelForTableView:(UITableView *)tableView atIndexPath:(NSIndexPath *)indexPath {
+    SVURLRequestModel *currenModel=[[SVURLRequestModel alloc] init];
     if (tableView == mySearchDisplayController.searchResultsTableView) {
-        currenModel=(SVHTTPRequestModel *)((filterHTTPRequests)[indexPath.row]);
+        currenModel=(SVURLRequestModel *)((filterHTTPRequests)[indexPath.row]);
     }else{
-        currenModel=(SVHTTPRequestModel *)((httpRequests)[indexPath.row]);
+        currenModel=(SVURLRequestModel *)((httpRequests)[indexPath.row]);
     }
     return currenModel;
 }

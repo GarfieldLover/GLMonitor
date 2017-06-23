@@ -1,14 +1,14 @@
 //
-//  SVHTTPRequestModel.m
+//  SVURLRequestModel.m
 //  Utility
 //
-//  Created by ZK on 2017/6/22.
+//  Created by ZK on 2017/6/23.
 //
 //
 
-#import "SVHTTPRequestModel.h"
+#import "SVURLRequestModel.h"
 
-@implementation SVHTTPRequestModel
+@implementation SVURLRequestModel
 @synthesize ne_request,ne_response;
 
 -(void)setNe_request:(NSURLRequest *)ne_request_new{
@@ -114,12 +114,12 @@
 #define kSQLDoubleMarks @"\"\""
 #define kSTRShortMarks  @"'"
 #define kSQLShortMarks  @"''"
-@interface NEHTTPModelManager(){
+@interface SVURLRequestModelManager(){
     NSMutableArray *allMapRequests;
 }
 @end
 
-@implementation NEHTTPModelManager
+@implementation SVURLRequestModelManager
 
 - (id)init {
     self = [super init];
@@ -131,18 +131,18 @@
     return self;
 }
 
-+ (NEHTTPModelManager *)defaultManager {
++ (SVURLRequestModelManager *)defaultManager {
     
-    static NEHTTPModelManager *staticManager;
+    static SVURLRequestModelManager *staticManager;
     static dispatch_once_t onceToken;
     dispatch_once(&onceToken, ^{
-        staticManager=[[NEHTTPModelManager alloc] init];
+        staticManager=[[SVURLRequestModelManager alloc] init];
     });
     return staticManager;
     
 }
 
-- (void)addModel:(SVHTTPRequestModel *) aModel {
+- (void)addModel:(SVURLRequestModel *) aModel {
     
     if ([aModel.responseMIMEType isEqualToString:@"text/html"]) {
         aModel.receiveJSONData=@"";
@@ -180,10 +180,10 @@
     return allMapRequests;
 }
 
-- (void)addMapObject:(SVHTTPRequestModel *)mapReq {
+- (void)addMapObject:(SVURLRequestModel *)mapReq {
     
     for (NSInteger i=0; i < allMapRequests.count; i++) {
-        SVHTTPRequestModel *req = [allMapRequests objectAtIndex:i];
+        SVURLRequestModel *req = [allMapRequests objectAtIndex:i];
         if (![mapReq.mapPath isEqualToString:req.mapPath]) {
             [allMapRequests replaceObjectAtIndex:i withObject:mapReq];
             return;
@@ -192,10 +192,10 @@
     [allMapRequests addObject:mapReq];
 }
 
-- (void)removeMapObject:(SVHTTPRequestModel *)mapReq {
+- (void)removeMapObject:(SVURLRequestModel *)mapReq {
     
     for (NSInteger i=0; i < allMapRequests.count; i++) {
-        SVHTTPRequestModel *req = [allMapRequests objectAtIndex:i];
+        SVURLRequestModel *req = [allMapRequests objectAtIndex:i];
         if ([mapReq.mapPath isEqualToString:req.mapPath]) {
             [allMapRequests removeObject:mapReq];
             return;
@@ -209,3 +209,4 @@
 
 
 @end
+
