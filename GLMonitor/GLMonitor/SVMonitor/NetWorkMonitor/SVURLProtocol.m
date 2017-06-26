@@ -52,15 +52,30 @@
 }
 
 + (NSURLRequest *)canonicalRequestForRequest:(NSURLRequest *)request {
-    
+ 
+#if 1
     NSString * host = request.URL.host;
     NSString * ip = [LXDHostMapper parseHost: host];
-    if (ip == nil) { return request; }
-    if ([LXDHostFilterRule isIpInvalid: ip]) { return request; }
+    if (ip == nil) {
+        NSMutableURLRequest *mutableReqeust = [request mutableCopy];
+        [NSURLProtocol setProperty:@YES forKey:@"SVURLProtocol" inRequest:mutableReqeust];
+        return [mutableReqeust copy];
+//        return request;
+    }
+    if ([LXDHostFilterRule isIpInvalid: ip]) {
+        NSMutableURLRequest *mutableReqeust = [request mutableCopy];
+        [NSURLProtocol setProperty:@YES forKey:@"SVURLProtocol" inRequest:mutableReqeust];
+        return [mutableReqeust copy];
+//        return request;
+    }
     
     NSString * absoluteURLString = request.URL.absoluteString;
     NSRange range = [absoluteURLString rangeOfString: host];
-    if (range.location == NSNotFound) { return request; }
+    if (range.location == NSNotFound) {
+        NSMutableURLRequest *mutableReqeust = [request mutableCopy];
+        [NSURLProtocol setProperty:@YES forKey:@"SVURLProtocol" inRequest:mutableReqeust];
+        return [mutableReqeust copy];
+    }
     
     absoluteURLString = [absoluteURLString stringByReplacingCharactersInRange: range withString: ip];
     NSMutableURLRequest * canonicalRequest = request.mutableCopy;
@@ -69,6 +84,11 @@
     
     canonicalRequest.URL = [NSURL URLWithString: absoluteURLString];
     return canonicalRequest;
+#else
+    NSMutableURLRequest *mutableReqeust = [request mutableCopy];
+    [NSURLProtocol setProperty:@YES forKey:@"SVURLProtocol" inRequest:mutableReqeust];
+    return [mutableReqeust copy];
+#endif
 }
 
 - (void)startLoading {
